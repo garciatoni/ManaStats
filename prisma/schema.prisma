@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  binaryTargets   = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  decks     Deck[]
+}
+
+model Deck {
+  id            Int         @id @default(autoincrement())
+  authorId      Int
+  name          String
+  format        String
+  likes         Int         @default(0)
+  views         Int         @default(0)
+  deckColors    String      @default("[]")
+  colorIdentity String      @default("[]")
+  description   String?
+  image         String?
+  status        Deck_Status @default(PRIVATE)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  author        User        @relation(fields: [authorId], references: [id])
+  cards         DeckCard[] // Relación con la tabla de unión
+}
+
+model Card {
+  id       String     @id @unique @map("card_id")
+  data     Json       @db.JsonB
+  name     String
+  type     String?
+  manaCost Int?
+  layout   String
+  decks    DeckCard[] // Relación con la tabla de unión
+}
+
+model DeckCard {
+  id           Int            @id @default(autoincrement())
+  deckId       Int
+  cardId       String
+  quantity     Int            @default(1)
+  cardLocation Card_Location? @default(MAINBOARD)
+  deck         Deck           @relation(fields: [deckId], references: [id])
+  card         Card           @relation(fields: [cardId], references: [id])
+
+  @@unique([deckId, cardId]) // Asegura que una combinación de deck y card sea única
+}
+
+model Tournament {
+  id        Int      @id @default(autoincrement())
+  name      String
+  format    String
+  date      DateTime
+  rounds    String?
+  wins      String?
+  losses    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Card_Location {
+  MAINBOARD
+  COMMANDER
+  SIDEBOARD
+  MAYBOARD
+}
+
+enum Deck_Status {
+  PRIVATE
+  PUBLIC
+}
+
+enum Role {
+  USER
+  ADMIN
+}
