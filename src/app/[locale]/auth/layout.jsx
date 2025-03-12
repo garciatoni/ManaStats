@@ -4,7 +4,6 @@
  export const AuthLayout = ({ children }) => {
   return (
     <>
-        asdd
         {children}
     </>    
   );

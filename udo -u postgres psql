@@ -1,0 +1,4 @@
+○ postgresql.service - PostgreSQL database server
+     Loaded: loaded (]8;;file://toni/usr/lib/systemd/system/postgresql.service\/usr/lib/systemd/system/postgresql.service]8;;\; [0;1;38:5:185mdisabled[0m; preset: [0;1;38:5:185mdisabled[0m)
+     Active: inactive (dead)
+       Docs: ]8;;man:postgres(1)\man:postgres(1)]8;;\

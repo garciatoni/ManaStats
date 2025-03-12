@@ -1,12 +1,13 @@
  
-import { useEffect } from 'react';
-import { InputCheck } from './InputCheck/InputCheck';
-import { InputRadio } from './InputRadio/InputRadio';
-import { InputSelector } from './InputSelector/InputSelector';
-import { InputText } from './InputText/InputText'
-import { InputTextSearch } from './InputTextSearch/InputTextSearch';
 
-export const RenderInputs = (
+// Components
+import { InputCheck } from '../components/inputs/InputCheck/InputCheck';
+import { InputRadio } from '../components/inputs/InputRadio/InputRadio';
+import { InputSelector } from '../components/inputs/InputSelector/InputSelector';
+import { InputText } from '../components/inputs/InputText/InputText';
+import { InputTextSearch } from '../components/inputs/InputTextSearch/InputTextSearch';
+
+export const InputsRenderFeature = (
     {   
         styles,    
         options, 

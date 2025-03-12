@@ -1,0 +1,53 @@
+.FormRenderFeatureContainer {
+    @include flex(row, center, center); 
+    width: 100%;  
+    user-select: none; 
+
+
+    .formContainer {
+        @include flex(row, end, center); 
+        width: 100%;
+        flex: 1; 
+
+
+        .inputExternalContainer {
+            @include flex(column, center, start);
+            width: 20%;
+            height: 63px;
+            position: relative;
+
+            
+            .inputContainer {
+                @include resetStyles(); 
+                @include textbase();
+                @include border('-right', $color: $golden);
+                color: $golden; 
+                width: calc(100% - 10px);
+                height: 30px; 
+                z-index: 100;
+                padding-left: 10px
+                
+            } 
+        }
+        
+        
+        
+    }
+    
+    
+    .submitInfo {
+        @include resetStyles(); 
+        @include textbaseSemiBold();
+        cursor: pointer; 
+        text-align: center; 
+        height: 30px; 
+        color: $golden;
+        @include border('all', $color: $golden);
+        
+
+    }
+    .errors{
+        display: none; 
+    }
+
+}
