@@ -2,7 +2,9 @@ import {NextIntlClientProvider} from 'next-intl';
 
 import { Geist, Geist_Mono } from "next/font/google";
  
-import "./globals.scss";
+// import "./globals.scss";
+import "../../styles/variables.module.scss";
+
 
 
 const geistSans = Geist({
