@@ -9,7 +9,7 @@ import {
 export const formsSchema = {
     createUser: {
         id: "createUser",
-        title: "auth.createUser.title",
+        title: "auth.register",
         description: "createUser.description",
         inputFields: [
           { 
@@ -17,7 +17,7 @@ export const formsSchema = {
             name: "username",
             label: "username",
             type: "text",
-            placeholder: "Enter your username",
+            placeholder: "auth.userName",
             autoComplete: "off",
             validationRules: userNameValidation
           },
@@ -26,7 +26,7 @@ export const formsSchema = {
             name: "email",
             label: "Email",
             type: "email",
-            placeholder: "Enter your email",
+            placeholder: "auth.userEmail",
             autoComplete: "email",
             validationRules: emailValidation
           },
@@ -35,7 +35,7 @@ export const formsSchema = {
             name: "password",
             label: "Password",
             type: "password",
-            placeholder: "Enter your password",
+            placeholder: "auth.userPass",
             autoComplete: "new-password",
             validationRules: passwordValidation
           },
@@ -44,18 +44,18 @@ export const formsSchema = {
             name: "confirmPassword",
             label: "confirmPassword",
             type: "password",
-            placeholder: "confirmPassword",
+            placeholder: "auth.userPass2",
             autoComplete: "off",
             validationRules: false
             // validationRules: password2Validation
           },
         ],
-        submitText: "auth.createUser.title",
+        submitText: "auth.register",
         urlSubmit: "/auth/create_user",
     },
     signIn: {
         id: "signIn",
-        title: "auth.signIn.title",
+        title: "auth.signIn",
         description: "signIn.description",
         inputFields: [
           { 
@@ -63,7 +63,7 @@ export const formsSchema = {
             name: "email",
             label: "Email",
             type: "email",
-            placeholder: "Enter your email",
+            placeholder: "auth.userEmail",
             autoComplete: "email",
             validationRules: emailValidation
           },
@@ -72,21 +72,12 @@ export const formsSchema = {
             name: "password",
             label: "Password",
             type: "password",
-            placeholder: "Enter your password",
+            placeholder: "auth.userPass",
             autoComplete: "new-password",
             validationRules: passwordValidation
           },
-          // {
-          //   inputId: 'InputCheck',
-          //   name: "rememberMe",
-          //   label: "rememberMe",
-          //   type: "password",
-          //   placeholder: "Enter your password",
-          //   autoComplete: "new-password",
-          //   validationRules: passwordValidation
-          // },
         ],
-        submitText: "auth.signIn.title",
+        submitText: "auth.signIn",
         urlSubmit: "/auth/signIn",
     },
     createDeck: {

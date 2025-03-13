@@ -1,5 +1,5 @@
 .FormRenderFeatureContainer {
-    @include flex(column); 
+    @include flex(column);
     width: 100%;
     height: 100%;
     gap: 70px;
@@ -9,11 +9,11 @@
     .formTitle {
         @include flex(row, center, center);
         color: $golden;
-        width: 100%;  
+        width: 100%;
     }
 
     .formContainer {
-        @include flex(column, start); 
+        @include flex(column, start);
         width: 100%;
         flex: 1;
         gap: 40px;
@@ -22,44 +22,46 @@
         .inputExternalContainer {
             @include flex(column, start, start);
             width: 100%;
-            height: 63px;
+            // height: 63px;
             position: relative;
+            // background-color: greenyellow;
 
-            label{
+            label {
                 user-select: none;
                 color: $golden;
             }
 
-            .labelOff{
+            .labelOff {
                 @include textbase();
-                position: absolute; 
-                top: 5px; 
-                transition: top 0.5s ease; 
+                position: absolute;
+                top: 5px;
+                transition: top 0.5s ease;
                 // @include border('bottom', $color: transparent);  
             }
 
-            .labelOn{
+            .labelOn {
                 @include textbase();
                 position: absolute;
                 top: -30px;
                 transition: top 0.3s ease;
 
             }
-            
+
             .inputContainer {
-                @include resetStyles(); 
+                @include resetStyles();
                 @include textbase();
                 @include border('bottom', $color: $golden);
                 color: $golden;
                 padding-left: 10px;
                 width: calc(100% - 10px);
-                height: 35px; 
+                height: 35px;
                 z-index: 100;
 
                 transition: border-width 0.3s ease, box-shadow 0.4s ease;
 
-                &:not(:placeholder-shown), &:focus { 
-                    box-shadow: -1px -1px 0 0 $golden; 
+                &:not(:placeholder-shown),
+                &:focus {
+                    box-shadow: -1px -1px 0 0 $golden;
                 }
 
 
@@ -69,67 +71,73 @@
             .inputPassContainer {
                 @include flex(column, start, start);
                 width: 100%;
-                height: 100%; 
-                
+                height: 35px;
+
                 .inputPass {
-                    @include resetStyles(); 
+                    @include resetStyles();
                     @include textbase();
                     @include border('bottom', $color: $golden);
-                    color: $golden; 
-                    
+                    color: $golden;
+
                     padding-left: 10px;
                     width: calc(90% - 10px);
-                    
-                    height: 35px; 
+
+                    height: 35px;
                     z-index: 100;
-                    
-                    &:not(:placeholder-shown), &:focus { 
-                        box-shadow: -1px -1px 0 0 $golden; 
+
+                    &:not(:placeholder-shown),
+                    &:focus {
+                        box-shadow: -1px -1px 0 0 $golden;
                     }
                 }
-                
+
                 .hidePasswordButton {
-                    @include resetStyles(); 
+                    @include resetStyles();
                     @include flex;
                     @include border('bottom', $color: $golden);
                     width: 10%;
                     height: 35px;
 
                     svg {
-                        path{
+                        path {
                             fill: $golden;
-                        } 
+                        }
                     }
-                     
-                    
+
+
                 }
             }
 
 
             .errors {
-                @include textbase(); 
+                @include textbase();
+                position: absolute;
                 color: red;
                 height: 27px;
                 width: 79%;
+                top: 50%;
+                left: 25px;
+                transform: translateY(-40%);
+                // background-color: red;
             }
         }
-        
 
- 
+
+
     }
 
 
     .submitInfo {
-        @include resetStyles(); 
+        @include resetStyles();
         @include textbaseSemiBold();
         cursor: pointer;
         width: 100%;
         text-align: center;
-        padding: 10px 0 ;
+        padding: 10px 0;
         box-shadow: 0 0 0 1px $golden;
         background-color: $grey;
         color: $golden;
-        
+
         &:hover {
             background-color: $golden;
             color: $grey;

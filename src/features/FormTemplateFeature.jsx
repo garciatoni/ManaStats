@@ -1,18 +1,20 @@
-// Hooks
-// import { useDispatch } from 'react-redux';
-import { useTranslation } from "react-i18next";
 import { useForm, useWatch } from "react-hook-form";
-// import { useDispatchByOrigin } from "../../hooks/useDispatchByOrigin";
-// import { useRequest } from '../../hooks/useRequest';
- 
-// Constants
-import { formsSchema } from '../../public/constants/formsSchema.js';
 
 // Components
 import { InputsRenderFeature } from './InputsRenderFeature.jsx';
-
 // Form Styles
 import authStyles from '../styles/formStyles/authStyles.module.scss'
+// Constants
+import { formsSchema } from '../../public/constants/formsSchema.js';
+// Hooks
+// import { useDispatch } from 'react-redux';
+import { useTranslations } from 'next-intl';
+
+// import { useDispatchByOrigin } from "../../hooks/useDispatchByOrigin";
+// import { useRequest } from '../../hooks/useRequest';
+ 
+
+
 
 // import createDeckStyles from '../styles/formStyles/createDeckStyles.module';
 // import addCartToDeckStyles from '../styles/formStyles/addCartToDeckStyles.module';
@@ -42,7 +44,7 @@ export const FormTemplateFeature = ({ formId }) => {
         // dispatchOrigin(data);
     }
 
-    const { t } = useTranslation();
+    const t = useTranslations();
 
 
     const methods = useForm();
