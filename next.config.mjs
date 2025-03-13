@@ -1,9 +1,8 @@
 import createNextIntlPlugin from 'next-intl/plugin';
-import path from 'path';
-
+import { dirname } from 'path';
 // Importar para usar fileURLToPath
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import path from 'path';
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -15,8 +14,9 @@ const __dirname = dirname(__filename);
 
 const nextConfig = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-  },
+    includePaths: [path.join(__dirname, "src/styles")],  // ✅ Ahora apunta a src/styles
+    prependData: `@import "variables.scss"; @import "mixins.scss";`
+  }
 };
 
 export default withNextIntl(nextConfig);
