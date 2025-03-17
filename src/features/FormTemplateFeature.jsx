@@ -1,3 +1,7 @@
+// Actions
+import { registerUser, signIn } from "../actions/authActions.js";
+import { registerUserSchema, signInSchema } from "../validations/validations"; // Ajusta la ruta según tu estructura
+// Hooks
 import { useForm, useWatch } from "react-hook-form";
 
 // Components
@@ -7,51 +11,63 @@ import authStyles from '../styles/formStyles/authStyles.module.scss'
 // Constants
 import { formsSchema } from '../../public/constants/formsSchema.js';
 // Hooks
-// import { useDispatch } from 'react-redux';
 import { useTranslations } from 'next-intl';
-
-// import { useDispatchByOrigin } from "../../hooks/useDispatchByOrigin";
-// import { useRequest } from '../../hooks/useRequest';
- 
-
-
-
-// import createDeckStyles from '../styles/formStyles/createDeckStyles.module';
-// import addCartToDeckStyles from '../styles/formStyles/addCartToDeckStyles.module';
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const FormTemplateFeature = ({ formId }) => {
-    const { title, inputFields, submitText, urlSubmit } = formsSchema[formId]
-    // const dispatch = useDispatch();
-    // const { post } = useRequest();
-    // const { dispatchOrigin } = useDispatchByOrigin()
-
-    const formStyles = {
-        createUser: authStyles,
-        signIn: authStyles,
-        // createDeck: createDeckStyles,
-        // addCartToDeck: addCartToDeckStyles,
-    }
-
-    const styles = formStyles[formId]
-
-
-    const onSubmit = async (newData) => {
-        // console.log(newData)
-        // let userAuth = true;
-        // (urlSubmit === "/auth/signIn" && urlSubmit === "/auth/create_user") && (userAuth = false)
-        // const { data } = await post(urlSubmit, newData, userAuth)
-
-        // dispatchOrigin(data);
-    }
-
     const t = useTranslations();
 
+    const { title, inputFields, submitText } = formsSchema[formId];
 
-    const methods = useForm();
+    const formConfig = {
+        createUser: {
+            action: registerUser, // Función para registrar un usuario
+            styles: authStyles, // Estilos del formulario
+            schema: registerUserSchema, // Esquema de validación
+        },
+        signIn: {
+            action: signIn, // Función para iniciar sesión
+            styles: authStyles, // Estilos del formulario
+            schema: signInSchema, // Esquema de validación
+        },
+        // Puedes agregar más formularios aquí
+        // createDeck: {
+        //   action: createDeck,
+        //   styles: createDeckStyles,
+        //   schema: createDeckSchema,
+        // },
+    };
+
+    const { action, styles, schema } = formConfig[formId];
+
+    const methods = useForm({
+        resolver: zodResolver(schema),
+    });
+
     const { handleSubmit, register, formState: { errors }, control } = methods;
+    
     const format = useWatch({ control, name: 'format' });
 
+    // alert(formId)
+    const onSubmit = async (newData) => {
+        console.log(newData)
+        const data = await action(newData);
 
+        if (data?.status === "error") {
+            console.log(data)
+            data.details?.fieldErrors &&
+                Object.entries(data.details?.fieldErrors).forEach(([field, messages]) => {
+                    methods.setError(field, {
+                        type: "manual",
+                        message: messages[0],
+                    });
+                });
+        } else if (data?.status === "success") {
+            console.log("SUCCESS", data);
+            // TODO: Redirigir a la página de inicio de sesión y store
+        }
+
+    }
 
     return (
         <div className={styles.FormRenderFeatureContainer} >
@@ -72,14 +88,15 @@ export const FormTemplateFeature = ({ formId }) => {
                             key={id}
                             {...input}
                             {...methods}
+                            errors={errors} // Pasa los errores al componente InputsRenderFeature
                         />
                     ))
                 }
-                
-                <input 
-                    type="submit" 
-                    value={t(submitText)} 
-                    className={styles.submitInfo} 
+
+                <input
+                    type="submit"
+                    value={t(submitText)}
+                    className={styles.submitInfo}
                 />
 
             </form>

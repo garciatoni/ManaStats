@@ -1,53 +1,63 @@
 {
-  "general": " ",
   "auth": {
-    "signIn": "Sign In",
-    "info": "Don't have an account yet?",
-    "register": "Register",
-    "info2": "If you already have an account!",
-    "userName": "Enter your username",
-    "userEmail": "Enter your email",
-    "userPass": "Enter your password",
-    "userPass2": "Repeat your password",
-    "welcome": "Hello! Welcome to ManaStats MTG Deck Manager",
-    "description": "Create, share, and manage your MTG decks."
+      "signIn": "Sign In",
+      "info": "Don't have an account yet?",
+      "register": "Register",
+      "info2": "If you already have an account!",
+      "userName": "Enter your username",
+      "userEmail": "Enter your email",
+      "userPass": "Enter your password",
+      "userPass2": "Repeat your password",
+      "welcome": "Hello! Welcome to ManaStats MTG Deck Manager",
+      "description": "Create, share, and manage your MTG decks."
   },
   "Deck": {
-    "sort": {
-      "typeMap": "Type",
-      "subTypeMap": "SubType",
-      "colorsMap": "Colors",
-      "colorsIdentityMap": "Color Identity",
-      "manaValueMap": "ManaValue"
-    }
+      "sort": {
+          "typeMap": "Type",
+          "subTypeMap": "SubType",
+          "colorsMap": "Colors",
+          "colorsIdentityMap": "Color Identity",
+          "manaValueMap": "ManaValue"
+      }
   },
   "sort": {
-    "Commander": "Commanders",
-    "Battle": "Battles",
-    "Planeswalker": "Planeswalkers",
-    "Creature": "Creatures",
-    "Sorcery": "Sorceries",
-    "Instant": "Instants",
-    "Artifact": "Artifacts",
-    "Enchantment": "Enchantments",
-    "Land": "Lands",
-    "W": "White",
-    "B": "Black",
-    "U": "Blue",
-    "R": "Red",
-    "G": "Green",
-    "C": "Colorless",
-    "M": "Multicolor"
+      "Commander": "Commanders",
+      "Battle": "Battles",
+      "Planeswalker": "Planeswalkers",
+      "Creature": "Creatures",
+      "Sorcery": "Sorceries",
+      "Instant": "Instants",
+      "Artifact": "Artifacts",
+      "Enchantment": "Enchantments",
+      "Land": "Lands",
+      "W": "White",
+      "B": "Black",
+      "U": "Blue",
+      "R": "Red",
+      "G": "Green",
+      "C": "Colorless",
+      "M": "Multicolor"
   },
   "viewMyDecks": "View my decks",
   "createDeck": {
-    "title": "Add Deck",
-    "commanderName": "Commander Name"
+      "title": "Add Deck",
+      "commanderName": "Commander Name"
   },
+
   "errors": {
-    "emailRequired": "The Email is required",
-    "passwordRequired": "The Password is required",
-    "userNameRequired": "User name is required",
-    "invalid email address": "User name is required"
+      "usernameRequired": "Username is required",
+      "emailRequired": "Email is required",
+      "passwordRequired": "Password is required",
+      "password2Required": "Confirm password is required",
+      "usernameTooShort": "Username must be at least 3 characters long",
+      "invalidEmail": "Please enter a valid email address",
+      "passwordTooShort": "Password must be at least 8 characters long",
+      "passwordsNotSame": "Passwords do not match",
+      "userExistsEmail": "A user with this email already exists",
+      "userExistsUsername": "A user with this username already exists",
+      "userNotFound": "User not found",
+      "incorrectPassword": "Incorrect password",
+      "validationError": "Validation error",
+      "internalServerError": "An internal server error occurred"
   }
 }

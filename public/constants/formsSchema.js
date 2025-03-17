@@ -18,17 +18,15 @@ export const formsSchema = {
             label: "username",
             type: "text",
             placeholder: "auth.userName",
-            autoComplete: "off",
-            validationRules: userNameValidation
+            autoComplete: "off", 
           },
           { 
             inputId: 'inputText',           
             name: "email",
-            label: "Email",
+            label: "email",
             type: "email",
             placeholder: "auth.userEmail",
-            autoComplete: "email",
-            validationRules: emailValidation
+            autoComplete: "email", 
           },
           {
             inputId: 'inputText',
@@ -36,23 +34,21 @@ export const formsSchema = {
             label: "Password",
             type: "password",
             placeholder: "auth.userPass",
-            autoComplete: "new-password",
-            validationRules: passwordValidation
+            autoComplete: "new-password", 
           },
           {
             inputId: 'inputText',
-            name: "confirmPassword",
-            label: "confirmPassword",
+            name: "password2",
+            label: "password2",
             type: "password",
             placeholder: "auth.userPass2",
             autoComplete: "off",
-            validationRules: false
-            // validationRules: password2Validation
           },
         ],
         submitText: "auth.register",
-        urlSubmit: "/auth/create_user",
     },
+
+    
     signIn: {
         id: "signIn",
         title: "auth.signIn",
@@ -65,8 +61,7 @@ export const formsSchema = {
             type: "email",
             placeholder: "auth.userEmail",
             autoComplete: "email",
-            validationRules: emailValidation
-          },
+           },
           {
             inputId: 'inputText',
             name: "password",
@@ -74,12 +69,11 @@ export const formsSchema = {
             type: "password",
             placeholder: "auth.userPass",
             autoComplete: "new-password",
-            validationRules: passwordValidation
-          },
+           },
         ],
         submitText: "auth.signIn",
-        urlSubmit: "/auth/signIn",
     },
+    
     createDeck: {
       id: "createDeck",
       title: "createDeck.title",

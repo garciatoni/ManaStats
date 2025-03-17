@@ -9,9 +9,19 @@ import { useTranslations } from 'next-intl';
 //  import { EyeIconOpen } from '@assets/ui/eyeIconOpen'
 
 
-export const InputText = ({ styles, type = 'text', register, name, placeholder, validationRules, errors, conditional, ...rest }) => {
-    const t = useTranslations();
+export const InputText = ({
+    styles,
+    type = 'text',
+    register,
+    name,
+    placeholder,
+    validationRules,
+    errors,
+    conditional,
+    ...rest
+}) => {
 
+    const t = useTranslations();
     const [inputType, setInputType] = useState(type);
     const [hasText, setHasText] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
@@ -23,13 +33,13 @@ export const InputText = ({ styles, type = 'text', register, name, placeholder, 
 
 
     const handleFocus = () => setIsFocused(true);
-    const handleBlur = () => {setIsFocused(false),errors[name] = false};
+    const handleBlur = () => { setIsFocused(false), errors[name] = false };
     const handleInput = (e) => setHasText(e.target.value.length > 0);
 
     const handleClick = () => setInputType((prevType) => (prevType === 'password' ? 'text' : 'password'));
 
     const showError = errors[name] ? (
-        <span className={styles.errors}>{t(`errors.${errors[name].message}`)}</span>
+        <span className={styles.errors}>{t(`${errors[name].message}`)}</span>
     ) : null;
 
 
