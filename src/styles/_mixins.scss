@@ -59,20 +59,23 @@
   @else if $direction =='-right' {
     border-bottom: $width $style $color;
     border-left: $width $style $color;
-    border-top: $width $style $color; 
-  }
-  @else if $direction =='-left' {
-    border-right: $width $style $color;
-    border-bottom: $width $style $color; 
     border-top: $width $style $color;
   }
+
+  @else if $direction =='-left' {
+    border-right: $width $style $color;
+    border-bottom: $width $style $color;
+    border-top: $width $style $color;
+  }
+
   @else if $direction =='-top' {
     border-right: $width $style $color;
     border-bottom: $width $style $color;
-    border-left: $width $style $color; 
+    border-left: $width $style $color;
   }
+
   @else if $direction =='-bottom' {
-    border-right: $width $style $color; 
+    border-right: $width $style $color;
     border-left: $width $style $color;
     border-top: $width $style $color;
   }
@@ -108,7 +111,7 @@
 }
 
 @mixin textbase() {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   font-family: $font;
 }

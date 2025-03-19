@@ -1,3 +1,5 @@
+"use client"
+
 // Actions
 import { registerUser, signIn } from "../actions/authActions.js";
 import { registerUserSchema, signInSchema } from "../validations/validations"; // Ajusta la ruta según tu estructura
@@ -10,12 +12,16 @@ import { InputsRenderFeature } from './InputsRenderFeature.jsx';
 import authStyles from '../styles/formStyles/authStyles.module.scss'
 // Constants
 import { formsSchema } from '../../public/constants/formsSchema.js';
+import { useRouter } from 'next/navigation'
 // Hooks
 import { useTranslations } from 'next-intl';
+import { useUserStore } from "../store/userStore.js";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export const FormTemplateFeature = ({ formId }) => {
     const t = useTranslations();
+    const router = useRouter();
+    const setUser = useUserStore((state) => state.setUser)
 
     const { title, inputFields, submitText } = formsSchema[formId];
 
@@ -24,11 +30,15 @@ export const FormTemplateFeature = ({ formId }) => {
             action: registerUser, // Función para registrar un usuario
             styles: authStyles, // Estilos del formulario
             schema: registerUserSchema, // Esquema de validación
+            redirection: "/es", // Redirecion
+            dispatcher: setUser
         },
         signIn: {
-            action: signIn, // Función para iniciar sesión
-            styles: authStyles, // Estilos del formulario
-            schema: signInSchema, // Esquema de validación
+            action: signIn,
+            styles: authStyles,
+            schema: signInSchema,
+            redirection: "/es",
+            dispatcher: setUser,
         },
         // Puedes agregar más formularios aquí
         // createDeck: {
@@ -38,14 +48,14 @@ export const FormTemplateFeature = ({ formId }) => {
         // },
     };
 
-    const { action, styles, schema } = formConfig[formId];
+    const { action, styles, schema, redirection, dispatcher } = formConfig[formId];
 
     const methods = useForm({
         resolver: zodResolver(schema),
     });
 
     const { handleSubmit, register, formState: { errors }, control } = methods;
-    
+
     const format = useWatch({ control, name: 'format' });
 
     // alert(formId)
@@ -63,8 +73,14 @@ export const FormTemplateFeature = ({ formId }) => {
                     });
                 });
         } else if (data?.status === "success") {
-            console.log("SUCCESS", data);
-            // TODO: Redirigir a la página de inicio de sesión y store
+ 
+            dispatcher(data.user)
+
+            redirection && (
+                router.refresh(),
+                router.push(redirection)
+            )
+
         }
 
     }

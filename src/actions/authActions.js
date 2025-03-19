@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 
 const SECRET_KEY = process.env.JWT_SECRET || "secreto_super_seguro"; // 🔐 Define en .env
 
-// ✅ REGISTRO DE USUARIO
+// REGISTER
 export const registerUser = async (formData) => {
   try {
 
@@ -57,18 +57,39 @@ export const registerUser = async (formData) => {
       data: { username, email, password: hashedPassword },
     });
 
-    return { status: "success", message: "auth.userCreated", user: newUser };
+
+    const token = jwt.sign({ 
+      userid: newUser.id, 
+      useremail: newUser.email,
+      username: newUser.username,
+      createdAt: newUser.createdAt
+    }, SECRET_KEY, 
+    { expiresIn: "7d" });
+
+    cookies().set("token", token, { httpOnly: true, secure: true, path: "/" });
+
+    // return { status: "success", message: "auth.userCreated", user: newUser };
+    
+    return { 
+      status: "success", 
+      message: "auth.userCreated", 
+      user:{
+        userid: newUser.id, 
+        useremail: newUser.email,
+        username: newUser.username,
+        createdAt: newUser.createdAt,
+        token
+      }
+    };
     
   } catch (error) {
     console.error("Error en registerUser:", error);
-    return { error: "errors.internalServerError", status: "error" };
+    return { error, status: "error", };
   }
 
 };
 
-
-
-// ✅ LOGIN DE USUARIO
+// LOGIN
 export const signIn = async (formData) => {
   try {
 
@@ -115,16 +136,32 @@ export const signIn = async (formData) => {
       };
     }
 
-    const token = jwt.sign({ userId: user.id, email: user.email }, SECRET_KEY, { expiresIn: "7d" });
+    const token = jwt.sign({ 
+      userd: user.id, 
+      useremail: user.email,
+      username: user.username,
+      createdAt: user.createdAt
+    }, SECRET_KEY, 
+    { expiresIn: "7d" });
 
     cookies().set("token", token, { httpOnly: true, secure: true, path: "/" });
 
-    return { status: "success", message: "auth.loginSuccess", token, user:{userNmae: user.name, userEmail: user.email} };
+    return { 
+      status: "success", 
+      message: "auth.loginSuccess", 
+      user:{
+        userd: user.id, 
+        useremail: user.email,
+        username: user.username,
+        createdAt: user.createdAt,
+        token
+      }
+    };
     
   } catch (error) {
     console.error("Error en signIn:", error);
     return {
-      error: "errors.internalServerError",
+      error,
       details: {
         fieldErrors: {
           root: ["errors.internalServerError"], // Error general
@@ -135,6 +172,23 @@ export const signIn = async (formData) => {
   }
 };
 
+
+export const checkAuth = async () => {
+  const token = await cookies().get("token")?.value;
+  if (!token) return Response.json({ user: null }, { status: 401 });
+
+  try {
+    
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);  
+    
+    return JSON.parse(JSON.stringify(decoded));
+    
+  } catch (error) {
+    return Response.json({ user: null }, { status: 401 });
+  }
+
+  return token || null; // Devuelve el token o null si no existe
+};
 
 
 

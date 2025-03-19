@@ -1,6 +1,6 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
-import prettier from "eslint-plugin-prettier";
+// import prettier from "eslint-plugin-prettier";
 import prettierConfig from "eslint-config-prettier";
 import react from "eslint-plugin-react";
 
@@ -10,9 +10,9 @@ export default [
   js.configs.recommended, // Reglas recomendadas de JS
   react.configs.recommended, // Reglas recomendadas de React
   ...compat.extends("next/core-web-vitals"), // Reglas optimizadas para Next.js
-  prettierConfig, // Desactiva reglas que chocan con Prettier
+  // prettierConfig, // Desactiva reglas que chocan con Prettier
   {
-    plugins: { prettier },
+    // plugins: { prettier },
     rules: {
       "prettier/prettier": "error", // Forzar reglas de Prettier
       "react/react-in-jsx-scope": "off", // Next.js no necesita importar React

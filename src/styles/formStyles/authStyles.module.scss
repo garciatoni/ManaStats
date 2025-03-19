@@ -1,10 +1,10 @@
 .FormRenderFeatureContainer {
-    @include flex(column);
+    @include flex(column, $gap: 40px);
     width: 100%;
     height: 100%;
-    gap: 70px;
     flex-wrap: nowrap;
     user-select: none;
+
 
     .formTitle {
         @include flex(row, center, center);
@@ -13,18 +13,16 @@
     }
 
     .formContainer {
-        @include flex(column, start);
+        @include flex(column, start, $gap: 40px);
         width: 100%;
         flex: 1;
-        gap: 40px;
+
 
 
         .inputExternalContainer {
             @include flex(column, start, start);
             width: 100%;
-            // height: 63px;
             position: relative;
-            // background-color: greenyellow;
 
             label {
                 user-select: none;
@@ -34,7 +32,7 @@
             .labelOff {
                 @include textbase();
                 position: absolute;
-                top: 5px;
+                top: 8px;
                 transition: top 0.5s ease;
                 // @include border('bottom', $color: transparent);  
             }
@@ -42,8 +40,10 @@
             .labelOn {
                 @include textbase();
                 position: absolute;
-                top: -30px;
+                top: -20px;
                 transition: top 0.3s ease;
+                // @include border('bottom', $color: $golden);
+
 
             }
 
@@ -54,16 +54,8 @@
                 color: $golden;
                 padding-left: 10px;
                 width: calc(100% - 10px);
-                height: 35px;
+                height: 30px;
                 z-index: 100;
-
-                transition: border-width 0.3s ease, box-shadow 0.4s ease;
-
-                &:not(:placeholder-shown),
-                &:focus {
-                    box-shadow: -1px -1px 0 0 $golden;
-                }
-
 
 
             }
@@ -71,7 +63,7 @@
             .inputPassContainer {
                 @include flex(column, start, start);
                 width: 100%;
-                height: 35px;
+                height: 30px;
 
                 .inputPass {
                     @include resetStyles();
@@ -85,10 +77,6 @@
                     height: 35px;
                     z-index: 100;
 
-                    &:not(:placeholder-shown),
-                    &:focus {
-                        box-shadow: -1px -1px 0 0 $golden;
-                    }
                 }
 
                 .hidePasswordButton {
